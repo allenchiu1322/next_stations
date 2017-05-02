@@ -30,6 +30,7 @@ class TableSeeder extends Seeder
         $this->_fill_admin();
         $this->_fill_route();
         $this->_fill_station();
+        $this->_fill_transfer();
     }
 
     /**
@@ -165,6 +166,24 @@ class TableSeeder extends Seeder
                     'sequence' => $seq,
                 ]);
             }
+        }
+    }
+
+    /**
+     * 轉乘資訊部份
+     */
+    private function _fill_transfer() {
+        $data = [
+            ['台灣高鐵,左營', '高雄捷運,左營', '1'],
+        ];
+        foreach ($data as $k => $v) {
+            $station_a = $this->stationRepository->get_station_id_by_name($v[0]);
+            $station_b = $this->stationRepository->get_station_id_by_name($v[1]);
+            $ret = DB::table('transfer')->insert([
+                'station_a' => $station_a,
+                'station_b' => $station_b,
+                'type' => $v[2],
+            ]);
         }
     }
 }
