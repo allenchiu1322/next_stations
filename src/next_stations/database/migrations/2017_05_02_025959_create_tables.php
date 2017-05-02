@@ -40,8 +40,8 @@ class CreateTables extends Migration
             $table->increments('id');
             $table->integer('admin');
             $table->integer('route');
-            $table->string('station');
-            $table->string('sequence');
+            $table->integer('station');
+            $table->integer('sequence');
         });
         //轉乘對應
         Schema::create('transfer', function (Blueprint $table) {
