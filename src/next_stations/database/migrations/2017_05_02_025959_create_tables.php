@@ -29,10 +29,19 @@ class CreateTables extends Migration
         //車站
         Schema::create('station', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('admin');
             $table->integer('route');
             $table->string('name');
             $table->string('name_en');
             $table->string('code');
+        });
+        //車站順序
+        Schema::create('sequence', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('admin');
+            $table->integer('route');
+            $table->string('station');
+            $table->string('sequence');
         });
         //轉乘對應
         Schema::create('transfer', function (Blueprint $table) {
@@ -54,6 +63,7 @@ class CreateTables extends Migration
         Schema::drop('admin');
         Schema::drop('route');
         Schema::drop('station');
+        Schema::drop('sequence');
         Schema::drop('transfer');
     }
 }

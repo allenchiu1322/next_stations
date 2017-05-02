@@ -4,8 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Station extends Model
+class Sequence extends Model
 {
     //
-    protected $table = 'station';
 }

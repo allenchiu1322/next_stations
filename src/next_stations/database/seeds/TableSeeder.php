@@ -4,15 +4,18 @@ use Illuminate\Database\Seeder;
 
 use App\Next_stations\Repositories\AdminRepository;
 use App\Next_stations\Repositories\RouteRepository;
+use App\Next_stations\Repositories\StationRepository;
 
 class TableSeeder extends Seeder
 {
     protected $adminRepository;
     protected $routeRepository;
+    protected $stationRepository;
 
     public function __construct() {
         $this->adminRepository = new AdminRepository;
         $this->routeRepository = new RouteRepository;
+        $this->stationRepository = new StationRepository;
     }
     /**
      * Run the database seeds.
@@ -88,13 +91,32 @@ class TableSeeder extends Seeder
             ]
         ];
         foreach ($data as $k => $v) {
-            $id = $this->routeRepository->get_route_id_by_name($k);
+            //取出業者名稱
+            $tmp = explode(',', $k);
+            $admin = $tmp[0];
+            $admin_id = $this->adminRepository->get_admin_id_by_name($admin);
+            $route_id = $this->routeRepository->get_route_id_by_name($k);
+            //車站順序參數
+            $seq = 0;
             foreach ($v as $v2) {
-                DB::table('station')->insert([
-                    'route' => $id,
-                    'name' => $v2[0],
-                    'name_en' => $v2[1],
-                    'code' => $v2[2],
+                $seq++;
+                //找同業者同名車站，若已存在則不新增
+                $station_id = $this->stationRepository->get_station_id_by_name($admin . ',' . $v2[0]);
+                if ($station_id == FALSE) {
+                    $station_id = DB::table('station')->insertGetId([
+                        'admin' => $admin_id,
+                        'route' => $route_id,
+                        'name' => $v2[0],
+                        'name_en' => $v2[1],
+                        'code' => $v2[2],
+                    ]);
+                }
+                //車站順序資料
+                $ret = DB::table('sequence')->insert([
+                    'admin' => $admin_id,
+                    'route' => $route_id,
+                    'station' => $station_id,
+                    'sequence' => $seq,
                 ]);
             }
         }
