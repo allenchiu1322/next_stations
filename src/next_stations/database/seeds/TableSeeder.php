@@ -41,6 +41,7 @@ class TableSeeder extends Seeder
             ['台灣高鐵', ''],
             ['台北捷運', ''],
             ['高雄捷運', ''],
+            ['桃園捷運', ''],
         ];
         foreach ($data as $v) {
             DB::table('admin')->insert([
@@ -61,6 +62,9 @@ class TableSeeder extends Seeder
             '高雄捷運' => [
                 ['紅線', ''],
                 ['橘線', '']
+            ],
+            '桃園捷運' => [
+                ['機場線', ''],
             ],
         ];
         foreach ($data as $k => $v) {
@@ -136,6 +140,29 @@ class TableSeeder extends Seeder
 				['鳳山國中', 'Fongshan Junior High School', 'O14'],
 				['大寮', 'Daliao', 'OT1'],
             ],
+            '桃園捷運,機場線' => [
+				['台北車站', 'Taipei Main Station', 'A1'],
+				['三重', 'Sanchong', 'A2'],
+				['新北產業園區', 'New Taipei Industrial Park', 'A3'],
+				['新莊副都心', 'Xinzhuang Fuduxin', 'A4'],
+				['泰山', 'Taishan', 'A5'],
+				['泰山貴和', 'Taishan Guihe', 'A6'],
+				['體育大學', 'National Taiwan Sport University', 'A7'],
+				['長庚醫院', 'Chang Gung Memorial Hospital', 'A8'],
+				['林口', 'Linkou', 'A9'],
+				['山鼻', 'Shanbi', 'A10'],
+				['坑口', 'Kengkou', 'A11'],
+				['機場第一航廈', 'Airport Terminal 1', 'A12'],
+				['機場第二航廈', 'Airport Terminal 2', 'A13'],
+				['機場旅館', 'Airport Hotel', 'A14a'],
+				['大園', 'Dayuan', 'A15'],
+				['橫山', 'Hengshan', 'A16'],
+				['領航', 'Linghang', 'A17'],
+				['高鐵桃園站', 'Taoyuan HSR Station', 'A18'],
+				['桃園體育園區', 'Taoyuan Sports Park', 'A19'],
+				['興南', 'Xingnan', 'A20'],
+				['環北', 'Huanbei', 'A21'],
+            ],
         ];
         foreach ($data as $k => $v) {
             //取出業者名稱
@@ -175,6 +202,8 @@ class TableSeeder extends Seeder
     private function _fill_transfer() {
         $data = [
             ['台灣高鐵,左營', '高雄捷運,左營', '1'],
+            ['台灣高鐵,台北', '桃園捷運,台北車站', '1'],
+            ['台灣高鐵,桃園', '桃園捷運,高鐵桃園站', '1'],
         ];
         foreach ($data as $k => $v) {
             $station_a = $this->stationRepository->get_station_id_by_name($v[0]);
