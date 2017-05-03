@@ -41,6 +41,7 @@ class TableSeeder extends Seeder
             ['台灣高鐵', ''],
             ['台北捷運', ''],
             ['高雄捷運', ''],
+            ['高雄輕軌', ''],
             ['桃園捷運', ''],
         ];
         foreach ($data as $v) {
@@ -62,6 +63,9 @@ class TableSeeder extends Seeder
             '高雄捷運' => [
                 ['紅線', ''],
                 ['橘線', '']
+            ],
+            '高雄輕軌' => [
+                ['環狀線', ''],
             ],
             '桃園捷運' => [
                 ['機場線', ''],
@@ -140,6 +144,16 @@ class TableSeeder extends Seeder
 				['鳳山國中', 'Fongshan Junior High School', 'O14', 0],
 				['大寮', 'Daliao', 'OT1', 0],
             ],
+            '高雄輕軌,環狀線' => [
+                ['籬仔內', 'Lizihnei', 'C1', 0],
+                ['凱旋瑞田', 'Kaisyuan Rueitian', 'C2', 0],
+                ['前鎮之星', 'Cianjhen Star', 'C3', 0],
+                ['凱旋中華', 'Kaisyuan Jhonghua', 'C4', 0],
+                ['夢時代', 'Dream Mall', 'C5', 0],
+                ['經貿園區', 'Commerce and Trade Park', 'C6', 0],
+                ['軟體園區', 'Software Technology Park', 'C7', 0],
+                ['高雄展覽館', 'Kaohsiung Exhibition Center', 'C8', 0],
+            ],
             '桃園捷運,機場線' => [
 				['台北車站', 'Taipei Main Station', 'A1', 0],
 				['三重', 'Sanchong', 'A2', 0],
@@ -205,6 +219,7 @@ class TableSeeder extends Seeder
             ['台灣高鐵,左營', '高雄捷運,左營', '1'],
             ['台灣高鐵,台北', '桃園捷運,台北車站', '1'],
             ['台灣高鐵,桃園', '桃園捷運,高鐵桃園站', '1'],
+            ['高雄捷運,凱旋', '高雄輕軌,前鎮之星', '1'],
         ];
         foreach ($data as $k => $v) {
             $station_a = $this->stationRepository->get_station_id_by_name($v[0]);
