@@ -16,3 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/build_api_param', 'ApiController@build_api_param');
+
+Route::post('/fetch_data', 'ApiController@fetch_data');

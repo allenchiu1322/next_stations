@@ -25,7 +25,7 @@ class TableSeeder extends Seeder
     public function run() {
         /*
          * test command:
-         * php artisan migrate:reset;php artisan migrate;php artisan db:Seeder
+         * php artisan migrate:reset;php artisan migrate;php artisan db:seed
          */
         $this->_fill_admin();
         $this->_fill_route();

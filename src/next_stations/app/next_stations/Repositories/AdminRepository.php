@@ -12,5 +12,10 @@ class AdminRepository {
         return $ret[0]->id;
     }
 
+    public function all_admins() {
+        $ret = Admin::get();
+        return $ret;
+    }
+
 }
 

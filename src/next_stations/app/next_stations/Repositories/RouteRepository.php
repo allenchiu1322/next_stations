@@ -26,5 +26,14 @@ class RouteRepository {
         }
     }
 
+    public function all_routes() {
+        $ret = Route::
+            join('admin', 'route.admin', '=', 'admin.id')
+            ->select('admin.name as admin_name',
+                'admin.id as admin_id',
+                'route.*')->get();
+        return $ret;
+    }
+
 }
 
