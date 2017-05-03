@@ -33,9 +33,13 @@ class ApiController extends Controller
             'action' => 'search_stations',
             'search_string' => '橋',
         ];
-         */
         $param = [
             'action' => 'query_station',
+            'station_id' => 35,
+        ];
+         */
+        $param = [
+            'action' => 'neighbor_stations',
             'station_id' => 35,
         ];
         return json_encode($param);

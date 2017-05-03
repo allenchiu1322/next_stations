@@ -5,6 +5,7 @@ use App\Next_stations\Repositories\AdminRepository;
 use App\Next_stations\Repositories\RouteRepository;
 use App\Next_stations\Repositories\StationRepository;
 use App\Next_stations\Repositories\SequenceRepository;
+use App\Next_stations\Repositories\TransferRepository;
 
 class DataFetchService {
 
@@ -12,12 +13,14 @@ class DataFetchService {
     protected $routeRepository;
     protected $stationRepository;
     protected $sequenceRepository;
+    protected $transferRepository;
 
     public function __construct() {
         $this->adminRepository = new AdminRepository;
         $this->routeRepository = new RouteRepository;
         $this->stationRepository = new StationRepository;
         $this->sequenceRepository = new SequenceRepository;
+        $this->transferRepository = new TransferRepository;
     }
 
     public function fetch_data($param) {
@@ -27,7 +30,8 @@ class DataFetchService {
         if ($check) {
             if (!in_array($param->action, array('all_routes',
                 'stations_in_a_route', 'search_stations',
-                'query_station'))) {
+                'query_station',
+                'neighbor_stations', 'transfer_stations'))) {
                 $check = FALSE;
                 $message = 'action ERROR';
             }
@@ -62,6 +66,22 @@ class DataFetchService {
             }
         }
 
+        //查鄰近車站需要有車站ID
+        if ($param->action == 'neighbor_stations') {
+            if (!isset($param->station_id) || !is_numeric($param->station_id)) {
+                $check = FALSE;
+                $message = 'param ERROR';
+            }
+        }
+
+        //查轉乘車站需要有車站ID
+        if ($param->action == 'transfer_stations') {
+            if (!isset($param->station_id) || !is_numeric($param->station_id)) {
+                $check = FALSE;
+                $message = 'param ERROR';
+            }
+        }
+
         //執行操作
         if ($check) {
             if ($param->action == 'all_routes') {
@@ -86,6 +106,18 @@ class DataFetchService {
                 $message = 'OK';
             } else if ($param->action == 'query_station') {
                 $station = $this->stationRepository->query_station($param->station_id);
+                $body = [
+                    'station' => $station,
+                ];
+                $message = 'OK';
+            } else if ($param->action == 'neighbor_stations') {
+                $station = $this->sequenceRepository->neighbor_stations($param->station_id);
+                $body = [
+                    'station' => $station,
+                ];
+                $message = 'OK';
+            } else if ($param->action == 'transfer_stations') {
+                $station = $this->transferRepository->transfer_stations($param->station_id);
                 $body = [
                     'station' => $station,
                 ];

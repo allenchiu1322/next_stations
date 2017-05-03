@@ -4,6 +4,7 @@ namespace App\Next_stations\Repositories;
 use Illuminate\Database\Eloquent\Collection;
 use App\Admin;
 use App\Station;
+use App\Sequence;
 
 class StationRepository {
 
