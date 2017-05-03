@@ -7,6 +7,9 @@ use App\Station;
 
 class StationRepository {
 
+    /**
+     * 用名稱查車站ID
+     */
     public function get_station_id_by_name($name) {
         //傳入的參數範例：「台北捷運,中山」
         //先查業者ID
@@ -28,6 +31,29 @@ class StationRepository {
         } else {
             return FALSE;
         }
+    }
+
+    /**
+     * 搜尋車站資訊
+     */
+    public function search_stations($search_string) {
+        $ret = Station::where([
+            ['name', 'LIKE', '%' . $search_string . '%'],
+        ])
+        ->select('id', 'name')
+        ->get();
+        return $ret;
+    }
+
+    /**
+     * 取得單一車站資訊
+     */
+    public function query_station($station_id) {
+        $ret = Station::where([
+            ['id', '=', $station_id],
+        ])
+        ->get();
+        return $ret;
     }
 
 }

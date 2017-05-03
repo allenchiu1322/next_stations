@@ -23,40 +23,20 @@ class ApiController extends Controller
     public function build_api_param() {
         /*
         $param = [
-            'action' => 'set',
-            'type' => 'seiyuu',
-            'data' => [
-                'seiyuu' => '茅原實里2',
-                'seiyuu_jp' => '茅原実里',
-            ]
+            'action' => 'all_routes',
         ];
         $param = [
-            'action' => 'get',
-            'type' => 'title',
-            'data' => [
-                'title' => '女',
-            ]
+            'action' => 'stations_in_a_route',
+            'route_id' => 2,
         ];
         $param = [
-            'action' => 'delete',
-            'type' => 'seiyuu',
-            'data' => [
-                'id' => 2,
-            ]
-        ];
-        $param = [
-            'action' => 'set',
-            'type' => 'character',
-            'data' => [
-                'character' => '千反田愛瑠',
-                'character_jp' => '千反田える',
-                'title' => '冰菓',
-                'seiyuu' => '佐藤聰美',
-            ]
+            'action' => 'search_stations',
+            'search_string' => '橋',
         ];
          */
         $param = [
-            'action' => 'all_routes',
+            'action' => 'query_station',
+            'station_id' => 35,
         ];
         return json_encode($param);
     }

@@ -28,6 +28,7 @@ class CreateTables extends Migration
         });
         //車站
         Schema::create('station', function (Blueprint $table) {
+            //todo 增加「是否為轉乘站」欄位
             $table->increments('id');
             $table->integer('admin');
             $table->integer('route');

@@ -7,6 +7,9 @@ use App\Route;
 
 class RouteRepository {
 
+    /**
+     * 依名稱取路線ID
+     */
     public function get_route_id_by_name($name) {
         //傳入的參數範例：「台北捷運,淡水信義線」
         //先查業者ID
@@ -26,6 +29,9 @@ class RouteRepository {
         }
     }
 
+    /**
+     * 取所有路線資料，含業者名稱
+     */
     public function all_routes() {
         $ret = Route::
             join('admin', 'route.admin', '=', 'admin.id')
